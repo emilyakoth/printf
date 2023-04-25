@@ -25,7 +25,7 @@ unsigned char handle_flags(const char *flag, char *index)
 		{'0', ZERO},
 		{'-', NEG},
 		{0, 0}
-	}
+	};
 
 	for (i = 0; flag[i]; i++)
 	{
@@ -46,7 +46,7 @@ unsigned char handle_flags(const char *flag, char *index)
 	}
 
 	return (ret);
-}
+};
 
 /**
  * handle_length - handles length
@@ -76,7 +76,7 @@ unsigned char handle_length(const char *modifier, char *index)
  * @args: arguments
  * @modifier: modifier
  * @index: index
- * Retunr: 0 if sucess
+ * Return: 0 if sucess
  */
 int handle_width(va_list args, const char *modifier, char *index)
 {
@@ -104,16 +104,16 @@ int handle_width(va_list args, const char *modifier, char *index)
 /**
  * handle_precision - matches prec
  * @args: arguments
- * @modiefier: modifier
+ * @modifier: modifier
  * @index: index
  * Return: 0 if sucess
  */
 int handle_precision(va_list args, const char *modifier, char *index)
 {
-	int valu = 0;
+	int value = 0;
 
 	if (*modifier != '.')
-		return (-1)
+		return (-1);
 	modifier++;
 	(*index)++;
 
@@ -134,9 +134,8 @@ int handle_precision(va_list args, const char *modifier, char *index)
 		{
 			value = va_arg(args, int);
 			if (value <= 0)
-			      return (0);
+				return (0);
 		}
-		
 		value *= 10;
 		value += (*modifier - '0');
 		modifier;
@@ -145,7 +144,9 @@ int handle_precision(va_list args, const char *modifier, char *index)
 }
 
 /**
- *
+ * handle_specifiers - handle specifiers
+ * @specifier: specifier
+ * Return: int
  */
 unsigned int (*handle_specifiers(const char *specifier))(va_list, buffer_t *,
 		unsigned char, int, int, unsigned char)
@@ -177,4 +178,3 @@ unsigned int (*handle_specifiers(const char *specifier))(va_list, buffer_t *,
 
 	return (NULL);
 }
-
