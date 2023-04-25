@@ -46,7 +46,7 @@ unsigned char handle_flags(const char *flag, char *index)
 	}
 
 	return (ret);
-}
+};
 
 /**
  * handle_length - handles length
@@ -76,7 +76,7 @@ unsigned char handle_length(const char *modifier, char *index)
  * @args: arguments
  * @modifier: modifier
  * @index: index
- * Retunr: 0 if sucess
+ * Return: 0 if sucess
  */
 int handle_width(va_list args, const char *modifier, char *index)
 {
@@ -110,10 +110,10 @@ int handle_width(va_list args, const char *modifier, char *index)
  */
 int handle_precision(va_list args, const char *modifier, char *index)
 {
-	int valu = 0;
+	int value = 0;
 
 	if (*modifier != '.')
-		return (-1)
+		return (-1);
 	modifier++;
 	(*index)++;
 
