@@ -1,4 +1,5 @@
 #include "main.h"
+#include <string.h>
 
 unsigned int convert_sbase(buffer_t *output, long int num, char *base,
 		unsigned char flags, int wid, int prec);
@@ -9,6 +10,7 @@ unsigned int convert_ubase(buffer_t *output,
 /**
  * convert_sbase - Converts a signed long to an inputted base and stores
  *                 the result to a buffer contained in a struct.
+ *  _memcp - ...
  * @output: A buffer_t struct containing a character array.
  * @num: A signed long to be converted.
  * @base: A pointer to a string containing the base to convert to.
