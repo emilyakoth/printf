@@ -1,0 +1,67 @@
+#include <stdarg.h>
+#include <stdio.h>
+
+/**
+ * my_printf - custom printf function with variable argument list.
+ * @str: the format string.
+ * @args: The argument list.
+ * @i: Integer
+ * @count: The number of integers
+ *
+ * Return: the number of characters printed (excluding the null byte)
+ */
+void my_printf(char *str, va_list args, int *i, int *count) {
+	char *s_arg;
+	int d_arg;
+	char c_arg;
+
+	while (*str) {
+	switch (*str) {
+	case 's':
+		s_arg = va_arg(args, char *);
+		while (*s_arg) {
+			putchar(*s_arg);
+			(*count)++;
+			s_arg++;
+		}
+		(*i)++;
+		break;
+	case 'd':
+		d_arg = va_arg(args, int);
+		printf("%d", d_arg);
+		(*i)++;
+		(*count)++;
+		break;
+		case 'c':
+		c_arg = va_arg(args, int);
+		putchar(c_arg);
+		(*i)++;
+		(*count)++;
+		break;
+		default:
+		putchar(*str);
+		(*i)++;
+		(*count)++;
+		break;
+	}
+	str++;
+	}
+}
+/**
+ * main - Entry point
+ *
+ * Return: The printed outcome
+ */
+int main() {
+	int count = 0;
+	int i = 0;
+	char *s = "Hello %s, your lucky number is %d and your initial is %c\n";
+	char name[] = "John";
+	int num = 7;
+	char init = 'J';
+
+	my_printf(s, name, num, init, &i, &count);
+	printf("The total number of characters printed is %d\n", count);
+
+	return 0;
+}

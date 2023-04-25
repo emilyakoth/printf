@@ -1,0 +1,102 @@
+#include <stdarg.h>
+#include <unistd.h>
+
+/**
+ * my_printf - custom printf function with variable argument list
+ * @format: the format string
+ *
+ * Return: the number of characters printed (excluding the null byte)
+ */
+int my_printf(const char *format, ...)
+{
+	va_list args;
+	int i = 0, track = 0;
+
+	if (format == NULL)
+	return (-1);
+
+	va_start(args, format);
+
+	while (format[i])
+	{
+		if (format[i] != '%')
+		{
+			write(1, &format[i], 1);
+			track++;
+		}
+		else
+		{
+		i++;
+		if (format[i] == 'd' || format[i] == 'i')
+		{
+			int num = va_arg(args, int);
+			int div = 1;
+		if (num < 0)
+		{
+			write(1, "-", 1);
+			track++;
+			num = -num;
+		}
+		while (num / div > 9)
+			div *= 10;
+		while (div > 0)
+		{
+			int digit = num / div;
+			write(1, &digit, 1);
+			track++;
+			num %= div;
+			div /= 10;
+		}
+		}
+		else if (format[i] == 's')
+		{
+			char *str = va_arg(args, char *);
+			if (str == NULL)
+			str = "(null)";
+			while (*str)
+			{
+				write(1, str, 1);
+				track++;
+				str++;
+			}
+		}
+		else if (format[i] == 'c')
+		{
+			char c = (char) va_arg(args, int);
+			write(1, &c, 1);
+			track++;
+		}
+		else if (format[i] == '%')
+		{
+			write(1, &format[i], 1);
+			track++;
+		}
+		else
+		{
+			write(1, &format[i - 1], 1);
+			write(1, &format[i], 1);
+			track += 2;
+		}
+	}
+	i++;
+	}
+
+	va_end(args);
+	return (track);
+}
+
+/**
+ * main - Function entry point
+ *
+ * Return: Printed content
+ */
+int main()
+{
+	my_printf("Hello, world!\n");
+	my_printf("The answer is %d.\n", 42);
+	my_printf("The color is %s.\n", "green");
+	my_printf("The character is %c.\n", 'A');
+	my_printf("The percentage sign is %%.\n");
+	my_printf("The NULL string is %s.\n", NULL);
+	return (0);
+}
