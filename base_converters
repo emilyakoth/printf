@@ -7,6 +7,7 @@ unsigned int convert_sbase(buffer_t *output, long int num, char *base,
 unsigned int convert_ubase(buffer_t *output,
 		unsigned long int num, char *base,
 		unsigned char flags, int wid, int prec);
+unsigned int _memcpy(buffer_t *output, const char *src, unsigned int n);
 
 /**
  * convert_sbase - Converts a signed long to an inputted base and stores
